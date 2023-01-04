@@ -45,4 +45,4 @@ along with a summary of the documents, lookups and functions added.
 ## Publication
 
 The store package has been published to [GitHub
-pages](https://gcfrench.github.io/spatialstore).
+pages](https://github.com/gcfrench/spatialstore).

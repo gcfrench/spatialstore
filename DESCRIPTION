@@ -9,7 +9,7 @@ Description: This package stores the commonly used spatial functions and
     R scripts and associated test scripts into the new package, as well as
     updating the pkgdown file
 License: CC0
-URL: https://gcfrench.github.io/spatialstore
+URL: https://github.com/gcfrench/spatialstore
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
