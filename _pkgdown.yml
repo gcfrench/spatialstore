@@ -13,12 +13,6 @@ navbar:
         href:
     - text: "lookups and functions"
       href: reference/index.html
-    - text: "archive"
-      menu:
-      - text:
-        href:
-    - text: "tasks"
-      href: articles/tasks.html
     - text: "versions"
       href: news/index.html
   right:
