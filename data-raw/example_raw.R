@@ -9,7 +9,7 @@ attribute_field <- tibble::tibble(
 )
 
 ## polygon sf object
-large_polygon <- sf::st_sf(attribute_field, geometry = large_polygon_geometry)
+sf::st_sf(attribute_field, geometry = large_polygon_geometry)
 
 ## save polygon sf object
 usethis::use_data(large_polygon, overwrite = TRUE)
@@ -101,6 +101,12 @@ small_polygons <- dplyr::bind_rows(small_polygon_crosses,
 ### save polygon sf object
 usethis::use_data(small_polygons, overwrite = TRUE)
 
+## small multipolygons ------------------------------
+small_multipolygons <- sf::st_combine(small_polygons)
+
+### save multipolygon sf object
+usethis::use_data(small_multipolygons, overwrite = TRUE)
+
 # points -----------------------------------------------------------------------
 points <- tibble::tibble(
   id = 1:8,
@@ -112,10 +118,14 @@ points <- tibble::tibble(
   sf::st_as_sf(coords = c("x", "y")) |>
   sf::st_set_crs("EPSG:27700")
 
-sf::st_centroid(small_polygon_outside)
-
 ## save points sf object
 usethis::use_data(points, overwrite = TRUE)
+
+# multipoints ------------------------------------------------------------------
+multipoints <- sf::st_union(points)
+
+## save multipoint sf object
+usethis::use_data(multipoints, overwrite = TRUE)
 
 # spatial filtering ------------------------------------------------------------
 
@@ -174,7 +184,7 @@ sf::st_union(small_polygons, by_feature = FALSE) |>
 sf::st_combine(small_polygons) # don't resolve borders
 
 # spatial aggregation [dissolve on field value] --------------------------------
-small_polygons |>
+small_multipolygons |>
   dplyr::group_by(relation) |>
   dplyr::summarise()
 
@@ -189,7 +199,18 @@ points |>
   sf::st_join(small_polygons, join = sf::st_is_within_distance, dist = 1, suffix = c("", ".1")) |>
   dplyr::select(-tidyselect::ends_with(".1"), -`DE-9IM`)
 
+# spatial type transformations -------------------------------------------------
+
+## cast multigeometries to single geometries
+small_multipolygons |>
+  sf::st_cast("POLYGON")
+
+multipoints |>
+  sf::st_cast("POINT")
+
 # export example geometries ----------------------------------------------------
 sf::write_sf(large_polygon, "C:/Users/Graham French/Desktop/example/large_polygon.shp")
 sf::write_sf(small_polygons, "C:/Users/Graham French/Desktop/example/small_polygons.shp")
+sf::write_sf(small_multipolygons, "C:/Users/Graham French/Desktop/example/small_multipolygons.shp")
 sf::write_sf(points, "C:/Users/Graham French/Desktop/example/points.shp")
+sf::write_sf(multipoints, "C:/Users/Graham French/Desktop/example/multipoints.shp")
