@@ -1,5 +1,5 @@
 # large polygon ----------------------------------------------------------------
-large_polygon_geometry <- list(rbind(c(250, 0), c(250, 1000), c(2000, 1000), c(2000, 0), c(250, 0))) |>
+large_polygon_geometry <- list(rbind(c(2.5, 0), c(2.5, 10), c(20, 10), c(20, 0), c(2.5, 0))) |>
   sf::st_polygon() |>
   sf::st_sfc(crs = "EPSG:27700")
 
@@ -17,7 +17,7 @@ usethis::use_data(large_polygon, overwrite = TRUE)
 # small polygons ---------------------------------------------------------------
 
 ## small polygon crossing ---------------------------
-small_polygon_geometry_crosses <- list(rbind(c(0, 250), c(0, 750), c(500, 750), c(500, 250), c(0, 250))) |>
+small_polygon_geometry_crosses <- list(rbind(c(0, 2.5), c(0, 7.5), c(5, 7.5), c(5, 2.5), c(0, 2.5))) |>
   sf::st_polygon() |>
   sf::st_sfc(crs = "EPSG:27700")
 
@@ -36,7 +36,7 @@ small_polygon_crosses <- sf::st_sf(attribute_field, geometry = small_polygon_geo
 usethis::use_data(small_polygon_crosses, overwrite = TRUE)
 
 ## small polygon within -----------------------------
-small_polygon_geometry_within <- list(rbind(c(500, 250), c(500, 750), c(1000, 750), c(1000, 250), c(500, 250))) |>
+small_polygon_geometry_within <- list(rbind(c(5, 2.5), c(5, 7.5), c(10, 7.5), c(10, 2.5), c(5, 2.5))) |>
   sf::st_polygon() |>
   sf::st_sfc(crs = "EPSG:27700")
 
@@ -55,7 +55,7 @@ small_polygon_within <- sf::st_sf(attribute_field, geometry = small_polygon_geom
 usethis::use_data(small_polygon_within, overwrite = TRUE)
 
 ## small polygon touches ----------------------------
-small_polygon_geometry_touches <- list(rbind(c(2000, 250), c(2000, 750), c(2500, 750), c(2500, 250), c(2000, 250))) |>
+small_polygon_geometry_touches <- list(rbind(c(20, 2.5), c(20, 7.5), c(25, 7.5), c(25, 2.5), c(20, 2.5))) |>
   sf::st_polygon() |>
   sf::st_sfc(crs = "EPSG:27700")
 
@@ -74,7 +74,7 @@ small_polygon_touches <- sf::st_sf(attribute_field, geometry = small_polygon_geo
 usethis::use_data(small_polygon_touches, overwrite = TRUE)
 
 ## small polygon outside ----------------------------
-small_polygon_geometry_outside <- list(rbind(c(2500, 250), c(2500, 750), c(3000, 750), c(3000, 250), c(2500, 250))) |>
+small_polygon_geometry_outside <- list(rbind(c(25, 2.5), c(25, 7.5), c(30, 7.5), c(30, 2.5), c(25, 2.5))) |>
   sf::st_polygon() |>
   sf::st_sfc(crs = "EPSG:27700")
 
@@ -112,8 +112,8 @@ points <- tibble::tibble(
   id = 1:8,
   relation = c("inside", "inside", "inside", "inside",
                "outside", "outside", "outside", "outside"),
-  x = c(250, 250, 750, 750, 2250, 2250, 2750, 2750),
-  y = c(500, 200, 500, 200, 500, 200, 500, 200)
+  x = c(2.5, 2.5, 7.5, 7.5, 22.5, 22.5, 27.5, 27.5),
+  y = c(5, 2, 5, 2, 5, 2, 5, 2)
 ) |>
   sf::st_as_sf(coords = c("x", "y")) |>
   sf::st_set_crs("EPSG:27700")
@@ -210,7 +210,5 @@ multipoints |>
 
 # export example geometries ----------------------------------------------------
 sf::write_sf(large_polygon, "C:/Users/Graham French/Desktop/example/large_polygon.shp")
-sf::write_sf(small_polygons, "C:/Users/Graham French/Desktop/example/small_polygons.shp")
 sf::write_sf(small_multipolygons, "C:/Users/Graham French/Desktop/example/small_multipolygons.shp")
-sf::write_sf(points, "C:/Users/Graham French/Desktop/example/points.shp")
 sf::write_sf(multipoints, "C:/Users/Graham French/Desktop/example/multipoints.shp")
