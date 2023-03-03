@@ -3,6 +3,18 @@ template:
   bootstrap: 5
   bootswatch: flatly
 
+reference:
+- title: "Example spatial datasets"
+  desc: "Example vector datasets used within the package"
+  contents:
+  - example_main_polygon
+  - example_polygons
+  - example_multipolygon
+  - example_points
+  - example_multipoint
+  - example_lines
+  - example_multiline
+
 navbar:
   left:
     - icon: fa-home fa-lg

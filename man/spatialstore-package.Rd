@@ -11,7 +11,7 @@ This package stores the commonly used spatial functions and lookups, along with 
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://gcfrench.github.io/spatialstore}
+  \item \url{https://github.com/gcfrench/spatialstore}
 }
 
 }
