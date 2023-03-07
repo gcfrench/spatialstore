@@ -265,8 +265,23 @@ fs::dir_ls(fs::path("data"), glob = "*.rda") |>
   })
 # ------------------------------------------------------------------------------
 
+# plot example spatial objects -------------------------------------------------
+library(spatialstore)
+example_raster <- terra::rast(fs::path("inst", "extdata", "tif_files", "example_raster.tif"))
 
+tmap::tm_shape(example_raster) +
+  tmap::tm_raster(palette = "Blues", style = "cont") +
+  tmap::tm_shape(example_main_polygon) +
+  tmap::tm_polygons(col = "red4") +
+  tmap::tm_shape(example_polygons) +
+  tmap::tm_polygons(col = "cyan3") +
+  tmap::tm_shape(example_lines) +
+  tmap::tm_lines(col = "orange3", lwd = 4) +
+  tmap::tm_shape(example_points) +
+  tmap::tm_dots(col = "yellow", size = 0.2) +
+  tmap::tm_layout(legend.show = FALSE)
 
+# ------------------------------------------------------------------------------
 
 
 
