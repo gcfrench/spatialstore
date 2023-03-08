@@ -270,16 +270,32 @@ library(spatialstore)
 example_raster <- terra::rast(fs::path("inst", "extdata", "tif_files", "example_raster.tif"))
 
 tmap::tm_shape(example_raster) +
-  tmap::tm_raster(palette = "Blues", style = "cont") +
+  tmap::tm_raster(palette = "Blues",
+                  style = "cont") +
   tmap::tm_shape(example_main_polygon) +
-  tmap::tm_polygons(col = "red4") +
+  tmap::tm_polygons(id = "id",
+                    col = "gray50",
+                    border.col = "gray25",
+                    lwd = 2) +
   tmap::tm_shape(example_polygons) +
-  tmap::tm_polygons(col = "cyan3") +
+  tmap::tm_polygons(id = "id",
+                    col = "firebrick1",
+                    border.col = "firebrick4",
+                    lwd = 2) +
   tmap::tm_shape(example_lines) +
-  tmap::tm_lines(col = "orange3", lwd = 4) +
+  tmap::tm_lines(id = "id",
+                 col = "firebrick4",
+                 lwd = 4) +
   tmap::tm_shape(example_points) +
-  tmap::tm_dots(col = "yellow", size = 0.2) +
-  tmap::tm_layout(legend.show = FALSE)
+  tmap::tm_dots(id = "id",
+                col = "firebrick3",
+                size = 0.2) +
+  tmap::tm_layout(legend.show = FALSE,
+                  frame = TRUE,
+                  frame.lwd = 2,
+                  outer.margins = c(bottom = 0, left = 0.01, top = 0, right = 0.01),
+                  outer.bg.color = "grey90",
+                  inner.margins = c(bottom = 0.02, left = 0.01, top = 0.02, right = 0.01))
 
 # ------------------------------------------------------------------------------
 
